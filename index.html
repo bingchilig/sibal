@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>모두케어 — 지체장애인 전용 돌봄 서비스</title>
+  <title>모두케어 — 지체장애인 전용 돌봄 서비스 (Orange Theme)</title>
   <meta name="description" content="지체장애인을 위한 접근성 최우선의 돌봄 매칭·예약 플랫폼" />
   <style>
     :root{
-      --primary:#0066FF;
-      --primary-hover:#0052CC;
+      /* --- 색상 변경 --- */
+      --primary:#F57C00; /* 메인 주황색 (조금 진하게) */
+      --primary-hover:#E65100; /* 더 진한 주황색 */
       --secondary:#64748B;
       --bg:#FFFFFF;
       --bg-secondary:#F8FAFC;
-      --bg-tertiary:#EFF6FF;
+      --bg-tertiary:#FFF3E0; /* 연한 주황색 배경 (Hero) */
+      /* ---------------- */
       --text:#1E293B;
       --text-secondary:#64748B;
       --text-light:#94A3B8;
@@ -78,7 +80,8 @@
     .logo-mark{
       width:36px;
       height:36px;
-      background:linear-gradient(135deg,#0066FF 0%,#00A3FF 100%);
+      /* --- 색상 변경 --- */
+      background:linear-gradient(135deg,var(--primary) 0%,#FFA726 100%);
       border-radius:8px;
       display:flex;
       align-items:center;
@@ -333,7 +336,8 @@
     input:focus,select:focus,textarea:focus{
       outline:none;
       border-color:var(--primary);
-      box-shadow:0 0 0 4px rgba(0,102,255,0.08)
+      /* --- 색상 변경 --- */
+      box-shadow:0 0 0 4px rgba(245,124,0,0.1);
     }
     
     textarea{resize:vertical;min-height:120px}
@@ -352,7 +356,8 @@
       width:64px;
       height:64px;
       border-radius:50%;
-      background:linear-gradient(135deg,var(--primary),#00A3FF);
+      /* --- 색상 변경 --- */
+      background:linear-gradient(135deg,var(--primary),#FFA726);
       color:white;
       border:none;
       cursor:pointer;
@@ -367,7 +372,8 @@
     
     .voice-btn:hover{
       transform:scale(1.05);
-      box-shadow:0 25px 35px -5px rgba(0,102,255,0.3)
+      /* --- 색상 변경 --- */
+      box-shadow:0 25px 35px -5px rgba(245,124,0,0.3);
     }
     
     .voice-btn.active{
@@ -375,8 +381,8 @@
     }
     
     @keyframes pulse{
-      0%,100%{box-shadow:0 0 0 0 rgba(0,102,255,0.7)}
-      50%{box-shadow:0 0 0 20px rgba(0,102,255,0)}
+      0%,100%{box-shadow:0 0 0 0 rgba(245,124,0,0.7)}
+      50%{box-shadow:0 0 0 20px rgba(245,124,0,0)}
     }
     
     .voice-btn:before{
@@ -481,7 +487,8 @@
     .caregiver-card:focus{
       outline:none;
       border-color:var(--primary);
-      box-shadow:0 0 0 4px rgba(0,102,255,0.1)
+      /* --- 색상 변경 --- */
+      box-shadow:0 0 0 4px rgba(245,124,0,0.1);
     }
     
     .caregiver-header{
@@ -645,13 +652,14 @@
     .alert-success{
       background:#D1FAE5;
       color:#065F46;
-      border:1px solid #A7F3D0
+      border:1px solid #A7F3D0;
     }
     
     .alert-info{
+      /* --- 색상 변경 --- */
       background:var(--bg-tertiary);
-      color:#1E40AF;
-      border:1px solid#BFDBFE
+      color:#B45309;
+      border:1px solid #FFE0B2;
     }
     
     /* Footer */
@@ -958,7 +966,7 @@
                 <div class="caregiver-exp">경력 7년</div>
               </div>
               <div class="caregiver-rating">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
                 </svg>
                 4.9
@@ -979,7 +987,7 @@
                 <div class="caregiver-exp">경력 5년</div>
               </div>
               <div class="caregiver-rating">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
                 </svg>
                 4.8
@@ -1000,7 +1008,7 @@
                 <div class="caregiver-exp">경력 10년</div>
               </div>
               <div class="caregiver-rating">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
                 </svg>
                 5.0
@@ -1021,7 +1029,7 @@
                 <div class="caregiver-exp">경력 8년</div>
               </div>
               <div class="caregiver-rating">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
                 </svg>
                 4.9
@@ -1042,7 +1050,7 @@
                 <div class="caregiver-exp">경력 6년</div>
               </div>
               <div class="caregiver-rating">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
                 </svg>
                 4.7
@@ -1063,7 +1071,7 @@
                 <div class="caregiver-exp">경력 4년</div>
               </div>
               <div class="caregiver-rating">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                   <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
                 </svg>
                 4.8
@@ -1102,7 +1110,7 @@
                 <strong style="color:var(--text);display:block;margin-bottom:4px">전화</strong>
                 <a href="tel:1588-0000">1588-0000</a>
               </div>
-              <div>
+               <div>
                 <strong style="color:var(--text);display:block;margin-bottom:4px">카카오톡</strong>
                 <span style="color:var(--text-secondary)">@모두케어</span>
               </div>
@@ -1126,16 +1134,16 @@
 
   <div class="voice-panel">
     <button id="voiceBtn" class="voice-btn" aria-label="음성 명령" title="음성 명령">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
         <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
         <line x1="12" y1="19" x2="12" y2="23"></line>
         <line x1="8" y1="23" x2="16" y2="23"></line>
       </svg>
-      <span class="voice-indicator"></span>
+      <span class="voice-indicator" aria-hidden="true"></span>
     </button>
     
-    <div id="voicePopup" class="voice-popup">
+    <div id="voicePopup" class="voice-popup" aria-hidden="true">
       <div class="voice-popup-title">음성 명령</div>
       <div class="voice-status" id="voiceStatus">마이크 버튼을 눌러 음성 명령을 시작하세요</div>
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
@@ -1159,7 +1167,7 @@
         안전하고 신뢰할 수 있는 돌봄 인력을 연결합니다
       </p>
       <p style="font-size:13px;color:var(--text-light);margin-top:20px">
-        본 서비스는 프로토타입입니다. 실제 운영 시 관련 법규 준수 및<br>
+        본 서비스는 프로토타입입니다. 실제 운영 시관련 법규 준수 및<br>
         백엔드 시스템, 보안 인증이 필요합니다.
       </p>
       <div class="footer-links">
@@ -1178,188 +1186,209 @@
     (function(){
       let fontSize = 16;
       const root = document.documentElement;
-      
+
       // 텍스트 크기 조절
       document.getElementById('textUp').addEventListener('click', function(){
         fontSize = Math.min(22, fontSize + 2);
-        root.style.setProperty('--font-size', fontSize + 'px');
+        root.style.setProperty('font-size', fontSize + 'px');
       });
-      
+
       document.getElementById('textDown').addEventListener('click', function(){
         fontSize = Math.max(12, fontSize - 2);
-        root.style.setProperty('--font-size', fontSize + 'px');
+        root.style.setProperty('font-size', fontSize + 'px');
       });
-      
+
       // 고대비 모드
       document.getElementById('contrast').addEventListener('click', function(){
         document.body.classList.toggle('high-contrast');
+        this.setAttribute('aria-pressed', document.body.classList.contains('high-contrast'));
       });
-      
-      // 예약 폼
-      const form = document.getElementById('bookingForm');
+
+      // 폼 제출 (시뮬레이션)
+      const bookingForm = document.getElementById('bookingForm');
       const formStatus = document.getElementById('formStatus');
-      
-      form.addEventListener('submit', function(e){
+      bookingForm.addEventListener('submit', function(e){
         e.preventDefault();
-        
-        const formData = new FormData(form);
-        const booking = {};
-        for(const [key, value] of formData.entries()){
-          booking[key] = value;
+        formStatus.innerHTML = ''; // 기존 메시지 초기화
+
+        // 유효성 검사 (간단)
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        if(!name || !phone){
+          let errorAlert = document.createElement('div');
+          errorAlert.className = 'alert alert-info'; // 주황색 테마의 info로 변경
+          errorAlert.textContent = '성명과 연락처는 필수 항목입니다.';
+          formStatus.appendChild(errorAlert);
+          return;
         }
-        
-        booking.id = Date.now();
-        booking.createdAt = new Date().toISOString();
-        
-        const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
-        bookings.push(booking);
-        localStorage.setItem('bookings', JSON.stringify(bookings));
-        
-        formStatus.innerHTML = '<div class="alert alert-success">예약이 성공적으로 접수되었습니다. 담당자가 24시간 내로 연락드리겠습니다.</div>';
-        form.reset();
-        
-        setTimeout(() => {
-          formStatus.innerHTML = '';
-        }, 6000);
+
+        // 제출 성공
+        let successAlert = document.createElement('div');
+        successAlert.className = 'alert alert-success';
+        successAlert.textContent = '예약이 성공적으로 신청되었습니다. 24시간 내로 연락드리겠습니다.';
+        formStatus.appendChild(successAlert);
+        bookingForm.reset();
       });
-      
-      // 임시저장
+
+      // 임시저장 (LocalStorage)
       document.getElementById('saveDraft').addEventListener('click', function(){
-        const formData = new FormData(form);
-        const draft = {};
-        for(const [key, value] of formData.entries()){
-          draft[key] = value;
-        }
-        localStorage.setItem('bookingDraft', JSON.stringify(draft));
-        
-        formStatus.innerHTML = '<div class="alert alert-info">임시 저장되었습니다.</div>';
-        setTimeout(() => {
+        try {
+          const formData = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            serviceType: document.getElementById('serviceType').value,
+            date: document.getElementById('date').value,
+            time: document.getElementById('time').value,
+            notes: document.getElementById('notes').value
+          };
+          localStorage.setItem('moduCareDraft', JSON.stringify(formData));
+
           formStatus.innerHTML = '';
-        }, 3000);
+          let infoAlert = document.createElement('div');
+          infoAlert.className = 'alert alert-info';
+          infoAlert.textContent = '입력 내용이 임시저장되었습니다.';
+          formStatus.appendChild(infoAlert);
+        } catch (e) {
+          console.error('LocalStorage 저장 실패', e);
+        }
       });
-      
-      // 임시저장 불러오기
-      const draft = localStorage.getItem('bookingDraft');
-      if(draft){
-        try{
-          const data = JSON.parse(draft);
-          for(const key in data){
-            const field = document.getElementById(key);
-            if(field) field.value = data[key];
+
+      // 페이지 로드 시 임시저장 데이터 불러오기
+      (function loadDraft(){
+        try {
+          const draft = localStorage.getItem('moduCareDraft');
+          if(draft){
+            const formData = JSON.parse(draft);
+            document.getElementById('name').value = formData.name || '';
+            document.getElementById('phone').value = formData.phone || '';
+            document.getElementById('serviceType').value = formData.serviceType || '';
+            document.getElementById('date').value = formData.date || '';
+            document.getElementById('time').value = formData.time || '';
+            document.getElementById('notes').value = formData.notes || '';
+
+            // 알림은 폼 상태 영역에 추가
+            const formStatus = document.getElementById('formStatus');
+            let infoAlert = document.createElement('div');
+            infoAlert.className = 'alert alert-info';
+            infoAlert.textContent = '임시저장된 내용을 불러왔습니다.';
+            formStatus.appendChild(infoAlert);
           }
-        }catch(e){}
-      }
-      
-      // 날짜 필드 최소값 설정
-      const dateField = document.getElementById('date');
-      const today = new Date().toISOString().split('T')[0];
-      dateField.setAttribute('min', today);
-      
-      // 긴급 연락
-      document.getElementById('emergencyBtn').addEventListener('click', function(){
-        if(confirm('긴급 상황입니까? 1577-1004로 연결하시겠습니까?')){
-          window.location.href = 'tel:1577-1004';
+        } catch (e) {
+          console.error('LocalStorage 불러오기 실패', e);
         }
-      });
-      
-      // 돌봄인력 키보드 내비게이션
-      const caregiverList = document.getElementById('caregiverList');
-      caregiverList.addEventListener('keydown', function(e){
-        const items = Array.from(this.querySelectorAll('[role="listitem"]'));
-        const current = document.activeElement;
-        const index = items.indexOf(current);
-        
-        if(e.key === 'ArrowDown' || e.key === 'ArrowRight'){
-          e.preventDefault();
-          const next = items[index + 1] || items[0];
-          next.focus();
-        }else if(e.key === 'ArrowUp' || e.key === 'ArrowLeft'){
-          e.preventDefault();
-          const prev = items[index - 1] || items[items.length - 1];
-          prev.focus();
-        }else if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          current.click();
-        }
-      });
-      
-      // 돌봄인력 카드 클릭
-      document.querySelectorAll('.caregiver-card').forEach(card => {
-        card.addEventListener('click', function(){
-          const name = this.querySelector('.caregiver-name').textContent;
-          alert(name + '의 상세 프로필 페이지로 이동합니다. (프로토타입)');
-        });
-      });
-      
-      // 음성 명령 (모의)
+      })();
+
+      // 음성 명령 (기능 시뮬레이션)
       const voiceBtn = document.getElementById('voiceBtn');
       const voicePopup = document.getElementById('voicePopup');
       const voiceStatus = document.getElementById('voiceStatus');
       const voiceCommand = document.getElementById('voiceCommand');
       let isListening = false;
-      
-      voiceBtn.addEventListener('click', function(){
-        isListening = !isListening;
-        
-        if(isListening){
+
+      // Web Speech API (Browser)
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      let recognition;
+
+      if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.lang = 'ko-KR';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.onstart = function() {
+          isListening = true;
           voiceBtn.classList.add('active');
           voicePopup.classList.add('active');
           voiceStatus.textContent = '듣고 있습니다...';
-          
-          // 시뮬레이션: 3초 후 명령 인식
-          setTimeout(() => {
-            const commands = ['예약하기', '돌봄인력 보기', '긴급 연락', '문의하기'];
-            const randomCommand = commands[Math.floor(Math.random() * commands.length)];
-            
-            voiceCommand.textContent = '"' + randomCommand + '"';
-            voiceCommand.style.display = 'block';
-            voiceStatus.textContent = '명령을 인식했습니다';
-            
-            setTimeout(() => {
-              handleVoiceCommand(randomCommand);
-              voiceBtn.classList.remove('active');
-              isListening = false;
-              
-              setTimeout(() => {
-                voicePopup.classList.remove('active');
-                voiceCommand.style.display = 'none';
-                voiceStatus.textContent = '마이크 버튼을 눌러 음성 명령을 시작하세요';
-              }, 2000);
-            }, 1500);
-          }, 3000);
-        }else{
+          voiceCommand.style.display = 'none';
+          voicePopup.setAttribute('aria-hidden', 'false');
+        };
+
+        recognition.onresult = function(event) {
+          const command = event.results[0][0].transcript.trim().replace(/\s/g, '');
+          voiceCommand.textContent = `인식된 명령: "${command}"`;
+          voiceCommand.style.display = 'block';
+
+          // 음성 명령 처리
+          handleVoiceCommand(command);
+        };
+
+        recognition.onerror = function(event) {
+          console.error('음성 인식 오류:', event.error);
+          voiceStatus.textContent = '오류가 발생했습니다. 다시 시도하세요.';
+        };
+
+        recognition.onend = function() {
+          isListening = false;
           voiceBtn.classList.remove('active');
-          voicePopup.classList.remove('active');
           voiceStatus.textContent = '마이크 버튼을 눌러 음성 명령을 시작하세요';
+          setTimeout(() => { voicePopup.classList.remove('active'); voicePopup.setAttribute('aria-hidden', 'true'); }, 3000);
+        };
+      } else {
+        // 브라우저가 지원하지 않는 경우
+        voiceBtn.disabled = true;
+        voiceBtn.title = "음성 명령이 지원되지 않는 브라우저입니다.";
+      }
+
+      voiceBtn.addEventListener('click', function() {
+        if (isListening) {
+          if (recognition) recognition.stop();
+        } else {
+          if (recognition) {
+            recognition.start();
+          }
         }
       });
       
-      function handleVoiceCommand(command){
-        switch(command){
-          case '예약하기':
-            document.getElementById('booking').scrollIntoView({behavior: 'smooth'});
-            break;
-          case '돌봄인력 보기':
-            document.getElementById('caregivers').scrollIntoView({behavior: 'smooth'});
-            break;
-          case '긴급 연락':
-            if(confirm('긴급 상황입니까? 1577-1004로 연결하시겠습니까?')){
-              window.location.href = 'tel:1577-1004';
+      function handleVoiceCommand(command) {
+        // 스크롤 이동 함수
+        const scrollToSection = (id) => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+            // 포커스 이동 (접근성)
+            const target = element.querySelector('h2');
+            if(target) {
+              target.setAttribute('tabindex', '-1');
+              target.focus();
             }
-            break;
-          case '문의하기':
-            document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
-            break;
+          }
+        };
+
+        if (command.includes('예약')) {
+          scrollToSection('booking');
+          const nameField = document.getElementById('name');
+          if (nameField) nameField.focus(); // 이름 필드에 포커스
+        } else if (command.includes('돌봄') || command.includes('인력')) {
+          scrollToSection('caregivers');
+        } else if (command.includes('긴급') || command.includes('연락')) {
+          const emergencyBtn = document.getElementById('emergencyBtn');
+          if (emergencyBtn) emergencyBtn.click();
+        } else if (command.includes('문의')) {
+          scrollToSection('contact');
+        } else {
+          voiceCommand.textContent = `"${command}" (은)는 인식할 수 없는 명령입니다.`;
         }
       }
-      
-      // 팝업 외부 클릭 시 닫기
-      document.addEventListener('click', function(e){
-        if(!voiceBtn.contains(e.target) && !voicePopup.contains(e.target)){
-          voicePopup.classList.remove('active');
-        }
+
+      // 긴급 연락 버튼 (시뮬레이션)
+      document.getElementById('emergencyBtn').addEventListener('click', function(){
+        alert('긴급 지원 센터(1577-1004)로 즉시 연결합니다.');
+        // 실제로는 window.location.href = 'tel:1577-1004'; 사용
       });
-      
+
+      // 돌봄인력 카드 접근성 (키보드 선택)
+      const caregiverCards = document.querySelectorAll('.caregiver-card');
+      caregiverCards.forEach(card => {
+        card.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            alert(this.querySelector('.caregiver-name').textContent + ' 님의 상세 정보로 이동합니다.');
+            // 실제로는 상세 페이지로 이동
+          }
+        });
+      });
+
     })();
   </script>
 </body>
