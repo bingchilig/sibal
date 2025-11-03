@@ -1,0 +1,1366 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>모두케어 — 지체장애인 전용 돌봄 서비스</title>
+  <meta name="description" content="지체장애인을 위한 접근성 최우선의 돌봄 매칭·예약 플랫폼" />
+  <style>
+    :root{
+      --primary:#0066FF;
+      --primary-hover:#0052CC;
+      --secondary:#64748B;
+      --bg:#FFFFFF;
+      --bg-secondary:#F8FAFC;
+      --bg-tertiary:#EFF6FF;
+      --text:#1E293B;
+      --text-secondary:#64748B;
+      --text-light:#94A3B8;
+      --border:#E2E8F0;
+      --border-light:#F1F5F9;
+      --success:#10B981;
+      --danger:#EF4444;
+      --warning:#F59E0B;
+      --font-size:16px;
+      --radius:12px;
+      --radius-lg:16px;
+      --shadow-sm:0 1px 2px rgba(0,0,0,0.04);
+      --shadow:0 4px 6px -1px rgba(0,0,0,0.06);
+      --shadow-lg:0 20px 25px -5px rgba(0,0,0,0.08);
+    }
+    
+    *{box-sizing:border-box;margin:0;padding:0}
+    
+    html,body{
+      height:100%;
+      font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans KR',sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      font-size:var(--font-size);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale
+    }
+    
+    a{color:var(--primary);text-decoration:none;transition:all 0.2s ease}
+    a:hover{color:var(--primary-hover)}
+    
+    /* Header */
+    header{
+      background:var(--bg);
+      border-bottom:1px solid var(--border-light);
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(10px);
+      background:rgba(255,255,255,0.9)
+    }
+    
+    .header-inner{
+      max-width:1280px;
+      margin:0 auto;
+      padding:0 32px;
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between
+    }
+    
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+      font-size:20px;
+      color:var(--text)
+    }
+    
+    .logo-mark{
+      width:36px;
+      height:36px;
+      background:linear-gradient(135deg,#0066FF 0%,#00A3FF 100%);
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-size:18px;
+      font-weight:700
+    }
+    
+    nav{display:flex;gap:32px;align-items:center}
+    nav a{
+      font-weight:500;
+      font-size:15px;
+      color:var(--text-secondary);
+      position:relative;
+      padding:4px 0
+    }
+    nav a:hover{color:var(--text)}
+    nav a:after{
+      content:'';
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:0;
+      height:2px;
+      background:var(--primary);
+      transition:width 0.3s ease
+    }
+    nav a:hover:after{width:100%}
+    
+    /* Accessibility Bar */
+    .access-bar{
+      background:var(--bg-secondary);
+      border-bottom:1px solid var(--border-light);
+      padding:12px 0
+    }
+    
+    .access-inner{
+      max-width:1280px;
+      margin:0 auto;
+      padding:0 32px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap
+    }
+    
+    .access-label{
+      font-size:14px;
+      font-weight:600;
+      color:var(--text-secondary);
+      margin-right:8px
+    }
+    
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 20px;
+      border-radius:var(--radius);
+      border:none;
+      font-weight:600;
+      font-size:15px;
+      cursor:pointer;
+      transition:all 0.2s ease;
+      text-decoration:none;
+      white-space:nowrap
+    }
+    
+    .btn-primary{
+      background:var(--primary);
+      color:white
+    }
+    .btn-primary:hover{
+      background:var(--primary-hover);
+      transform:translateY(-1px);
+      box-shadow:var(--shadow)
+    }
+    
+    .btn-secondary{
+      background:white;
+      color:var(--text-secondary);
+      border:1.5px solid var(--border)
+    }
+    .btn-secondary:hover{
+      border-color:var(--primary);
+      color:var(--primary)
+    }
+    
+    .btn-ghost{
+      background:transparent;
+      color:var(--text-secondary);
+      border:none;
+      padding:8px 16px
+    }
+    .btn-ghost:hover{
+      background:var(--bg-secondary);
+      color:var(--text)
+    }
+    
+    .btn-danger{
+      background:var(--danger);
+      color:white;
+      padding:14px 28px;
+      font-size:16px
+    }
+    .btn-danger:hover{
+      background:#DC2626;
+      transform:translateY(-1px);
+      box-shadow:var(--shadow-lg)
+    }
+    
+    .btn-lg{
+      padding:14px 32px;
+      font-size:16px
+    }
+    
+    .btn-icon{
+      width:40px;
+      height:40px;
+      padding:0;
+      border-radius:10px
+    }
+    
+    /* Container */
+    .container{
+      max-width:1280px;
+      margin:0 auto;
+      padding:0 32px
+    }
+    
+    /* Hero */
+    .hero{
+      background:linear-gradient(180deg,var(--bg-tertiary) 0%,var(--bg) 100%);
+      padding:80px 0;
+      margin-bottom:80px
+    }
+    
+    .hero-content{
+      text-align:center;
+      max-width:800px;
+      margin:0 auto
+    }
+    
+    .hero h1{
+      font-size:48px;
+      font-weight:800;
+      color:var(--text);
+      margin-bottom:20px;
+      line-height:1.2;
+      letter-spacing:-0.02em
+    }
+    
+    .hero-subtitle{
+      font-size:20px;
+      color:var(--text-secondary);
+      margin-bottom:40px;
+      line-height:1.6
+    }
+    
+    .hero-actions{
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      flex-wrap:wrap
+    }
+    
+    /* Section */
+    section{margin-bottom:80px}
+    
+    .section-header{
+      margin-bottom:40px
+    }
+    
+    .section-title{
+      font-size:32px;
+      font-weight:700;
+      color:var(--text);
+      margin-bottom:12px
+    }
+    
+    .section-description{
+      font-size:18px;
+      color:var(--text-secondary);
+      line-height:1.6
+    }
+    
+    /* Card */
+    .card{
+      background:var(--bg);
+      border-radius:var(--radius-lg);
+      padding:32px;
+      border:1px solid var(--border-light);
+      box-shadow:var(--shadow-sm);
+      transition:all 0.3s ease
+    }
+    
+    .card:hover{
+      box-shadow:var(--shadow);
+      border-color:var(--border)
+    }
+    
+    .card-title{
+      font-size:20px;
+      font-weight:700;
+      color:var(--text);
+      margin-bottom:16px
+    }
+    
+    .card-text{
+      color:var(--text-secondary);
+      line-height:1.7;
+      margin-bottom:16px
+    }
+    
+    /* Grid */
+    .grid{
+      display:grid;
+      gap:24px
+    }
+    
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    
+    /* Form */
+    .form-group{margin-bottom:24px}
+    
+    label{
+      display:block;
+      font-weight:600;
+      margin-bottom:8px;
+      color:var(--text);
+      font-size:14px
+    }
+    
+    .required{color:var(--danger);margin-left:2px}
+    
+    input,select,textarea{
+      width:100%;
+      padding:12px 16px;
+      border:1.5px solid var(--border);
+      border-radius:var(--radius);
+      font-size:15px;
+      font-family:inherit;
+      transition:all 0.2s ease;
+      background:var(--bg);
+      color:var(--text)
+    }
+    
+    input:focus,select:focus,textarea:focus{
+      outline:none;
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(0,102,255,0.08)
+    }
+    
+    textarea{resize:vertical;min-height:120px}
+    
+    ::placeholder{color:var(--text-light)}
+    
+    /* Voice Control */
+    .voice-panel{
+      position:fixed;
+      bottom:32px;
+      right:32px;
+      z-index:90
+    }
+    
+    .voice-btn{
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--primary),#00A3FF);
+      color:white;
+      border:none;
+      cursor:pointer;
+      box-shadow:var(--shadow-lg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      transition:all 0.3s ease;
+      position:relative
+    }
+    
+    .voice-btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 25px 35px -5px rgba(0,102,255,0.3)
+    }
+    
+    .voice-btn.active{
+      animation:pulse 1.5s infinite
+    }
+    
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 0 0 rgba(0,102,255,0.7)}
+      50%{box-shadow:0 0 0 20px rgba(0,102,255,0)}
+    }
+    
+    .voice-btn:before{
+      content:'';
+      position:absolute;
+      top:-4px;
+      left:-4px;
+      right:-4px;
+      bottom:-4px;
+      border-radius:50%;
+      border:2px solid var(--primary);
+      opacity:0;
+      transition:opacity 0.3s
+    }
+    
+    .voice-btn.active:before{
+      opacity:1;
+      animation:ripple 1.5s infinite
+    }
+    
+    @keyframes ripple{
+      0%{transform:scale(1);opacity:1}
+      100%{transform:scale(1.5);opacity:0}
+    }
+    
+    .voice-indicator{
+      position:absolute;
+      top:-12px;
+      right:-12px;
+      width:24px;
+      height:24px;
+      background:var(--success);
+      border-radius:50%;
+      border:3px solid white;
+      display:none
+    }
+    
+    .voice-btn.active .voice-indicator{
+      display:block;
+      animation:blink 1s infinite
+    }
+    
+    @keyframes blink{
+      0%,100%{opacity:1}
+      50%{opacity:0.3}
+    }
+    
+    .voice-popup{
+      position:absolute;
+      bottom:80px;
+      right:0;
+      background:white;
+      border-radius:var(--radius-lg);
+      padding:24px;
+      box-shadow:var(--shadow-lg);
+      border:1px solid var(--border);
+      width:320px;
+      display:none
+    }
+    
+    .voice-popup.active{display:block}
+    
+    .voice-popup-title{
+      font-weight:700;
+      font-size:16px;
+      margin-bottom:12px;
+      color:var(--text)
+    }
+    
+    .voice-status{
+      color:var(--text-secondary);
+      font-size:14px;
+      margin-bottom:16px
+    }
+    
+    .voice-command{
+      background:var(--bg-secondary);
+      padding:12px;
+      border-radius:var(--radius);
+      font-size:14px;
+      color:var(--text-secondary);
+      font-style:italic;
+      margin-top:8px
+    }
+    
+    /* Caregiver Card */
+    .caregiver-card{
+      background:var(--bg);
+      border:1.5px solid var(--border-light);
+      border-radius:var(--radius-lg);
+      padding:24px;
+      transition:all 0.3s ease;
+      cursor:pointer
+    }
+    
+    .caregiver-card:hover{
+      border-color:var(--primary);
+      box-shadow:var(--shadow);
+      transform:translateY(-2px)
+    }
+    
+    .caregiver-card:focus{
+      outline:none;
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(0,102,255,0.1)
+    }
+    
+    .caregiver-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:start;
+      margin-bottom:16px
+    }
+    
+    .caregiver-name{
+      font-weight:700;
+      font-size:18px;
+      color:var(--text);
+      margin-bottom:4px
+    }
+    
+    .caregiver-exp{
+      color:var(--text-secondary);
+      font-size:14px
+    }
+    
+    .caregiver-rating{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      background:var(--bg-tertiary);
+      padding:6px 12px;
+      border-radius:8px;
+      font-weight:600;
+      font-size:14px;
+      color:var(--primary)
+    }
+    
+    .caregiver-info{
+      color:var(--text-secondary);
+      font-size:14px;
+      line-height:1.6;
+      margin-bottom:16px
+    }
+    
+    .badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap
+    }
+    
+    .badge{
+      padding:6px 12px;
+      background:var(--bg-secondary);
+      border-radius:6px;
+      font-size:13px;
+      font-weight:600;
+      color:var(--text-secondary)
+    }
+    
+    .badge-primary{
+      background:var(--bg-tertiary);
+      color:var(--primary)
+    }
+    
+    .badge-success{
+      background:#D1FAE5;
+      color:#065F46
+    }
+    
+    /* Feature List */
+    .feature-list{
+      list-style:none;
+      padding:0
+    }
+    
+    .feature-list li{
+      padding:16px 0;
+      padding-left:28px;
+      position:relative;
+      color:var(--text-secondary);
+      border-bottom:1px solid var(--border-light)
+    }
+    
+    .feature-list li:last-child{border-bottom:none}
+    
+    .feature-list li:before{
+      content:'';
+      position:absolute;
+      left:0;
+      top:22px;
+      width:12px;
+      height:12px;
+      background:var(--success);
+      border-radius:50%
+    }
+    
+    /* Stats */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:24px;
+      margin:40px 0
+    }
+    
+    .stat-card{
+      text-align:center;
+      padding:24px;
+      background:var(--bg-secondary);
+      border-radius:var(--radius-lg)
+    }
+    
+    .stat-value{
+      font-size:36px;
+      font-weight:800;
+      color:var(--primary);
+      margin-bottom:8px
+    }
+    
+    .stat-label{
+      font-size:14px;
+      color:var(--text-secondary);
+      font-weight:600
+    }
+    
+    /* Emergency */
+    .emergency-card{
+      background:linear-gradient(135deg,#FEE2E2 0%,#FEF2F2 100%);
+      border:2px solid #FECACA;
+      border-radius:var(--radius-lg);
+      padding:32px;
+      text-align:center
+    }
+    
+    .emergency-title{
+      font-size:20px;
+      font-weight:700;
+      color:var(--text);
+      margin-bottom:16px
+    }
+    
+    .emergency-phone{
+      font-size:32px;
+      font-weight:800;
+      color:var(--danger);
+      margin:20px 0;
+      letter-spacing:-0.02em
+    }
+    
+    .emergency-phone a{
+      color:var(--danger);
+      text-decoration:none
+    }
+    
+    /* Alert */
+    .alert{
+      padding:16px 20px;
+      border-radius:var(--radius);
+      margin-top:20px;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+      gap:12px
+    }
+    
+    .alert-success{
+      background:#D1FAE5;
+      color:#065F46;
+      border:1px solid #A7F3D0
+    }
+    
+    .alert-info{
+      background:var(--bg-tertiary);
+      color:#1E40AF;
+      border:1px solid#BFDBFE
+    }
+    
+    /* Footer */
+    footer{
+      background:var(--bg-secondary);
+      border-top:1px solid var(--border-light);
+      padding:64px 0;
+      margin-top:120px
+    }
+    
+    .footer-content{
+      max-width:1280px;
+      margin:0 auto;
+      padding:0 32px;
+      text-align:center
+    }
+    
+    .footer-logo{
+      font-size:24px;
+      font-weight:700;
+      color:var(--text);
+      margin-bottom:16px
+    }
+    
+    .footer-text{
+      color:var(--text-secondary);
+      margin-bottom:24px;
+      line-height:1.7
+    }
+    
+    .footer-links{
+      display:flex;
+      gap:24px;
+      justify-content:center;
+      margin-top:24px;
+      padding-top:24px;
+      border-top:1px solid var(--border)
+    }
+    
+    .footer-links a{
+      color:var(--text-secondary);
+      font-size:14px
+    }
+    
+    /* Focus */
+    :focus-visible{
+      outline:3px solid var(--warning);
+      outline-offset:3px
+    }
+    
+    /* High Contrast */
+    body.high-contrast{
+      background:#000;
+      color:#FFF
+    }
+    
+    body.high-contrast .card,
+    body.high-contrast .caregiver-card,
+    body.high-contrast input,
+    body.high-contrast select,
+    body.high-contrast textarea{
+      background:#1A1A1A;
+      color:#FFF;
+      border-color:#444
+    }
+    
+    body.high-contrast header{
+      background:#000;
+      border-color:#333
+    }
+    
+    /* Skip Link */
+    .skip-link{
+      position:absolute;
+      left:-9999px;
+      top:0;
+      background:var(--warning);
+      color:#000;
+      padding:12px 24px;
+      font-weight:700;
+      border-radius:var(--radius);
+      z-index:9999
+    }
+    
+    .skip-link:focus{
+      left:12px;
+      top:12px
+    }
+    
+    /* Responsive */
+    @media (max-width:1024px){
+      .grid-2,.grid-3{grid-template-columns:1fr}
+    }
+    
+    @media (max-width:768px){
+      .header-inner{
+        padding:0 20px;
+        height:64px
+      }
+      nav{
+        gap:20px
+      }
+      .container,.access-inner{
+        padding:0 20px
+      }
+      .hero{
+        padding:60px 0
+      }
+      .hero h1{
+        font-size:36px
+      }
+      .hero-subtitle{
+        font-size:18px
+      }
+      .section-title{
+        font-size:28px
+      }
+      .card{
+        padding:24px
+      }
+      .voice-panel{
+        bottom:20px;
+        right:20px
+      }
+      .voice-btn{
+        width:56px;
+        height:56px;
+        font-size:20px
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  
+  <header role="banner">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-mark">M</div>
+        <span>모두케어</span>
+      </div>
+      <nav aria-label="주요 메뉴">
+        <a href="#about">서비스</a>
+        <a href="#booking">예약</a>
+        <a href="#caregivers">돌봄인력</a>
+        <a href="#contact">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="access-bar">
+    <div class="access-inner">
+      <span class="access-label">접근성</span>
+      <button id="textUp" class="btn btn-ghost btn-icon" aria-label="글자 크게" title="글자 크게">A+</button>
+      <button id="textDown" class="btn btn-ghost btn-icon" aria-label="글자 작게" title="글자 작게">A-</button>
+      <button id="contrast" class="btn btn-ghost" aria-label="고대비 모드" title="고대비 모드">고대비</button>
+    </div>
+  </div>
+
+  <main id="main" role="main">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>안전하고 전문적인<br>돌봄 서비스</h1>
+          <p class="hero-subtitle">지체장애인의 일상을 지원하는 검증된 전문 돌봄인력을 빠르고 쉽게 연결합니다. 접근성을 최우선으로 설계된 플랫폼에서 편리하게 이용하세요.</p>
+          <div class="hero-actions">
+            <a href="#booking" class="btn btn-primary btn-lg">예약 시작하기</a>
+            <a href="#caregivers" class="btn btn-secondary btn-lg">돌봄인력 둘러보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section id="about">
+        <div class="section-header">
+          <h2 class="section-title">신뢰할 수 있는 돌봄 서비스</h2>
+          <p class="section-description">모두케어는 이동이 불편한 지체장애인을 위한 전문 돌봄 매칭 플랫폼입니다. 방문 돌봄부터 원격 모니터링까지 필요에 맞는 서비스를 제공합니다.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-value">1,247</div>
+            <div class="stat-label">누적 매칭 건수</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">98.5%</div>
+            <div class="stat-label">고객 만족도</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">156</div>
+            <div class="stat-label">검증된 돌봄인력</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">긴급 지원</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <ul class="feature-list">
+            <li>전문 자격을 갖춘 검증된 돌봄인력 매칭</li>
+            <li>방문 및 원격 돌봄 서비스 제공</li>
+            <li>간편한 예약 및 일정 관리 시스템</li>
+            <li>24시간 긴급 연락 및 지원 체계</li>
+            <li>이동 보조 기구 사용 경험자 우선 배정</li>
+            <li>보호자 동의 및 관리 기능</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="booking">
+        <div class="section-header">
+          <h2 class="section-title">돌봄 예약</h2>
+          <p class="section-description">필요한 정보를 입력하시면 담당자가 24시간 내로 연락드립니다.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <form id="bookingForm">
+              <div class="form-group">
+                <label for="name">예약자 성명<span class="required">*</span></label>
+                <input id="name" name="name" type="text" required placeholder="홍길동" autocomplete="name" />
+              </div>
+              
+              <div class="form-group">
+                <label for="phone">연락처<span class="required">*</span></label>
+                <input id="phone" name="phone" type="tel" required placeholder="010-0000-0000" pattern="[0-9\-]{9,13}" />
+              </div>
+              
+              <div class="form-group">
+                <label for="serviceType">서비스 유형<span class="required">*</span></label>
+                <select id="serviceType" name="serviceType">
+                  <option value="">선택해주세요</option>
+                  <option value="visit">방문 돌봄</option>
+                  <option value="remote">원격 돌봄</option>
+                  <option value="both">방문 + 원격</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="date">희망 시작일<span class="required">*</span></label>
+                <input id="date" name="date" type="date" required />
+              </div>
+              
+              <div class="form-group">
+                <label for="time">희망 시간대</label>
+                <select id="time" name="time">
+                  <option value="morning">오전 (09:00 - 12:00)</option>
+                  <option value="afternoon">오후 (13:00 - 17:00)</option>
+                  <option value="evening">저녁 (18:00 - 21:00)</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="notes">특이사항</label>
+                <textarea id="notes" name="notes" placeholder="이동 보조 기구 사용, 주의사항 등을 입력해주세요"></textarea>
+              </div>
+              
+              <div style="display:flex;gap:12px;margin-top:8px">
+                <button type="submit" class="btn btn-primary" style="flex:1">예약 신청</button>
+                <button type="button" id="saveDraft" class="btn btn-secondary">임시저장</button>
+              </div>
+            </form>
+            
+            <div id="formStatus" role="status" aria-live="polite"></div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:24px">
+              <h3 class="card-title">예약 안내</h3>
+              <p class="card-text">예약 신청 후 담당자가 24시간 내로 연락드려 상세 일정을 조율합니다.</p>
+              <ul class="feature-list">
+                <li>신청 후 24시간 내 연락</li>
+                <li>일정 조율 및 확정</li>
+                <li>돌봄인력 배정</li>
+                <li>서비스 시작</li>
+              </ul>
+            </div>
+
+            <div class="emergency-card">
+              <div class="emergency-title">긴급 상황 시</div>
+              <div class="emergency-phone">
+                <a href="tel:1577-1004">1577-1004</a>
+              </div>
+              <p style="color:var(--text-secondary);font-size:14px;margin-top:12px">24시간 긴급 지원 센터 운영</p>
+              <button id="emergencyBtn" class="btn btn-danger" style="margin-top:16px">긴급 연락하기</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="caregivers">
+        <div class="section-header">
+          <h2 class="section-title">검증된 돌봄인력</h2>
+          <p class="section-description">경력과 전문성을 갖춘 돌봄인력을 소개합니다. 모든 인력은 엄격한 검증 절차를 거쳤습니다.</p>
+        </div>
+
+        <div class="grid grid-3" id="caregiverList" role="list">
+          <div role="listitem" tabindex="0" class="caregiver-card">
+            <div class="caregiver-header">
+              <div>
+                <div class="caregiver-name">김미영</div>
+                <div class="caregiver-exp">경력 7년</div>
+              </div>
+              <div class="caregiver-rating">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
+                </svg>
+                4.9
+              </div>
+            </div>
+            <div class="caregiver-info">전문 간병사 자격증 보유. 휠체어 이동 보조 및 지체장애인 돌봄 전문 경력 보유.</div>
+            <div class="badges">
+              <span class="badge badge-success">자격증</span>
+              <span class="badge badge-primary">보조기구 전문</span>
+              <span class="badge">방문 가능</span>
+            </div>
+          </div>
+
+          <div role="listitem" tabindex="0" class="caregiver-card">
+            <div class="caregiver-header">
+              <div>
+                <div class="caregiver-name">박지훈</div>
+                <div class="caregiver-exp">경력 5년</div>
+              </div>
+              <div class="caregiver-rating">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
+                </svg>
+                4.8
+              </div>
+            </div>
+            <div class="caregiver-info">요양보호사 1급. 지체장애인 이동 지원 및 일상생활 보조 경력 다수.</div>
+            <div class="badges">
+              <span class="badge badge-success">자격증</span>
+              <span class="badge badge-primary">이동 지원</span>
+              <span class="badge">원격 가능</span>
+            </div>
+          </div>
+
+          <div role="listitem" tabindex="0" class="caregiver-card">
+            <div class="caregiver-header">
+              <div>
+                <div class="caregiver-name">이수진</div>
+                <div class="caregiver-exp">경력 10년</div>
+              </div>
+              <div class="caregiver-rating">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
+                </svg>
+                5.0
+              </div>
+            </div>
+            <div class="caregiver-info">간호조무사 자격 보유. 원격 돌봄 시스템 운영 및 의료 보조 경험 풍부.</div>
+            <div class="badges">
+              <span class="badge badge-success">자격증</span>
+              <span class="badge badge-primary">원격 전문</span>
+              <span class="badge">의료 지원</span>
+            </div>
+          </div>
+
+          <div role="listitem" tabindex="0" class="caregiver-card">
+            <div class="caregiver-header">
+              <div>
+                <div class="caregiver-name">최영수</div>
+                <div class="caregiver-exp">경력 8년</div>
+              </div>
+              <div class="caregiver-rating">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
+                </svg>
+                4.9
+              </div>
+            </div>
+            <div class="caregiver-info">물리치료사 경력. 재활 운동 지도 및 이동 보조 기구 사용 교육 전문.</div>
+            <div class="badges">
+              <span class="badge badge-success">자격증</span>
+              <span class="badge badge-primary">재활 전문</span>
+              <span class="badge">방문 가능</span>
+            </div>
+          </div>
+
+          <div role="listitem" tabindex="0" class="caregiver-card">
+            <div class="caregiver-header">
+              <div>
+                <div class="caregiver-name">정은미</div>
+                <div class="caregiver-exp">경력 6년</div>
+              </div>
+              <div class="caregiver-rating">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
+                </svg>
+                4.7
+              </div>
+            </div>
+            <div class="caregiver-info">요양보호사 자격 보유. 장기 돌봄 및 일상 생활 전반 지원 경험.</div>
+            <div class="badges">
+              <span class="badge badge-success">자격증</span>
+              <span class="badge">생활 지원</span>
+              <span class="badge">방문 가능</span>
+            </div>
+          </div>
+
+          <div role="listitem" tabindex="0" class="caregiver-card">
+            <div class="caregiver-header">
+              <div>
+                <div class="caregiver-name">한상호</div>
+                <div class="caregiver-exp">경력 4년</div>
+              </div>
+              <div class="caregiver-rating">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0L10.163 5.255L16 6.078L12 10.255L12.944 16L8 13.255L3.056 16L4 10.255L0 6.078L5.837 5.255L8 0Z"/>
+                </svg>
+                4.8
+              </div>
+            </div>
+            <div class="caregiver-info">사회복지사 2급. 장애인 복지 전문가로 심리 상담 및 사회 활동 지원.</div>
+            <div class="badges">
+              <span class="badge badge-success">자격증</span>
+              <span class="badge badge-primary">심리 상담</span>
+              <span class="badge">원격 가능</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:40px">
+          <button class="btn btn-secondary btn-lg">더 많은 돌봄인력 보기</button>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-header">
+          <h2 class="section-title">문의 및 지원</h2>
+          <p class="section-description">궁금한 사항이 있으시면 언제든지 문의해주세요.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card">
+            <h3 class="card-title">일반 문의</h3>
+            <p class="card-text">평일 오전 9시부터 오후 6시까지 운영합니다.</p>
+            <div style="margin-top:24px">
+              <div style="margin-bottom:16px">
+                <strong style="color:var(--text);display:block;margin-bottom:4px">이메일</strong>
+                <a href="mailto:support@moducare.kr">support@moducare.kr</a>
+              </div>
+              <div style="margin-bottom:16px">
+                <strong style="color:var(--text);display:block;margin-bottom:4px">전화</strong>
+                <a href="tel:1588-0000">1588-0000</a>
+              </div>
+              <div>
+                <strong style="color:var(--text);display:block;margin-bottom:4px">카카오톡</strong>
+                <span style="color:var(--text-secondary)">@모두케어</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">개인정보 보호</h3>
+            <p class="card-text">모두케어는 개인정보 보호법을 준수하며 안전하게 정보를 관리합니다.</p>
+            <ul class="feature-list" style="margin-top:20px">
+              <li>최소한의 정보만 수집</li>
+              <li>SSL 암호화 통신</li>
+              <li>동의 기반 정보 처리</li>
+              <li>언제든 삭제 요청 가능</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="voice-panel">
+    <button id="voiceBtn" class="voice-btn" aria-label="음성 명령" title="음성 명령">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+        <line x1="12" y1="19" x2="12" y2="23"></line>
+        <line x1="8" y1="23" x2="16" y2="23"></line>
+      </svg>
+      <span class="voice-indicator"></span>
+    </button>
+    
+    <div id="voicePopup" class="voice-popup">
+      <div class="voice-popup-title">음성 명령</div>
+      <div class="voice-status" id="voiceStatus">마이크 버튼을 눌러 음성 명령을 시작하세요</div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">사용 가능한 명령:</div>
+        <div style="font-size:12px;color:var(--text-light);line-height:1.8">
+          "예약하기"<br>
+          "돌봄인력 보기"<br>
+          "긴급 연락"<br>
+          "문의하기"
+        </div>
+      </div>
+      <div id="voiceCommand" class="voice-command" style="display:none"></div>
+    </div>
+  </div>
+
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <div class="footer-logo">모두케어</div>
+      <p class="footer-text">
+        지체장애인을 위한 전문 돌봄 서비스 플랫폼<br>
+        안전하고 신뢰할 수 있는 돌봄 인력을 연결합니다
+      </p>
+      <p style="font-size:13px;color:var(--text-light);margin-top:20px">
+        본 서비스는 프로토타입입니다. 실제 운영 시 관련 법규 준수 및<br>
+        백엔드 시스템, 보안 인증이 필요합니다.
+      </p>
+      <div class="footer-links">
+        <a href="#">이용약관</a>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">서비스 소개</a>
+        <a href="#">채용</a>
+      </div>
+      <p style="margin-top:24px;font-size:13px;color:var(--text-light)">
+        © 2025 ModuCare. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      let fontSize = 16;
+      const root = document.documentElement;
+      
+      // 텍스트 크기 조절
+      document.getElementById('textUp').addEventListener('click', function(){
+        fontSize = Math.min(22, fontSize + 2);
+        root.style.setProperty('--font-size', fontSize + 'px');
+      });
+      
+      document.getElementById('textDown').addEventListener('click', function(){
+        fontSize = Math.max(12, fontSize - 2);
+        root.style.setProperty('--font-size', fontSize + 'px');
+      });
+      
+      // 고대비 모드
+      document.getElementById('contrast').addEventListener('click', function(){
+        document.body.classList.toggle('high-contrast');
+      });
+      
+      // 예약 폼
+      const form = document.getElementById('bookingForm');
+      const formStatus = document.getElementById('formStatus');
+      
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const booking = {};
+        for(const [key, value] of formData.entries()){
+          booking[key] = value;
+        }
+        
+        booking.id = Date.now();
+        booking.createdAt = new Date().toISOString();
+        
+        const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+        bookings.push(booking);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        
+        formStatus.innerHTML = '<div class="alert alert-success">예약이 성공적으로 접수되었습니다. 담당자가 24시간 내로 연락드리겠습니다.</div>';
+        form.reset();
+        
+        setTimeout(() => {
+          formStatus.innerHTML = '';
+        }, 6000);
+      });
+      
+      // 임시저장
+      document.getElementById('saveDraft').addEventListener('click', function(){
+        const formData = new FormData(form);
+        const draft = {};
+        for(const [key, value] of formData.entries()){
+          draft[key] = value;
+        }
+        localStorage.setItem('bookingDraft', JSON.stringify(draft));
+        
+        formStatus.innerHTML = '<div class="alert alert-info">임시 저장되었습니다.</div>';
+        setTimeout(() => {
+          formStatus.innerHTML = '';
+        }, 3000);
+      });
+      
+      // 임시저장 불러오기
+      const draft = localStorage.getItem('bookingDraft');
+      if(draft){
+        try{
+          const data = JSON.parse(draft);
+          for(const key in data){
+            const field = document.getElementById(key);
+            if(field) field.value = data[key];
+          }
+        }catch(e){}
+      }
+      
+      // 날짜 필드 최소값 설정
+      const dateField = document.getElementById('date');
+      const today = new Date().toISOString().split('T')[0];
+      dateField.setAttribute('min', today);
+      
+      // 긴급 연락
+      document.getElementById('emergencyBtn').addEventListener('click', function(){
+        if(confirm('긴급 상황입니까? 1577-1004로 연결하시겠습니까?')){
+          window.location.href = 'tel:1577-1004';
+        }
+      });
+      
+      // 돌봄인력 키보드 내비게이션
+      const caregiverList = document.getElementById('caregiverList');
+      caregiverList.addEventListener('keydown', function(e){
+        const items = Array.from(this.querySelectorAll('[role="listitem"]'));
+        const current = document.activeElement;
+        const index = items.indexOf(current);
+        
+        if(e.key === 'ArrowDown' || e.key === 'ArrowRight'){
+          e.preventDefault();
+          const next = items[index + 1] || items[0];
+          next.focus();
+        }else if(e.key === 'ArrowUp' || e.key === 'ArrowLeft'){
+          e.preventDefault();
+          const prev = items[index - 1] || items[items.length - 1];
+          prev.focus();
+        }else if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          current.click();
+        }
+      });
+      
+      // 돌봄인력 카드 클릭
+      document.querySelectorAll('.caregiver-card').forEach(card => {
+        card.addEventListener('click', function(){
+          const name = this.querySelector('.caregiver-name').textContent;
+          alert(name + '의 상세 프로필 페이지로 이동합니다. (프로토타입)');
+        });
+      });
+      
+      // 음성 명령 (모의)
+      const voiceBtn = document.getElementById('voiceBtn');
+      const voicePopup = document.getElementById('voicePopup');
+      const voiceStatus = document.getElementById('voiceStatus');
+      const voiceCommand = document.getElementById('voiceCommand');
+      let isListening = false;
+      
+      voiceBtn.addEventListener('click', function(){
+        isListening = !isListening;
+        
+        if(isListening){
+          voiceBtn.classList.add('active');
+          voicePopup.classList.add('active');
+          voiceStatus.textContent = '듣고 있습니다...';
+          
+          // 시뮬레이션: 3초 후 명령 인식
+          setTimeout(() => {
+            const commands = ['예약하기', '돌봄인력 보기', '긴급 연락', '문의하기'];
+            const randomCommand = commands[Math.floor(Math.random() * commands.length)];
+            
+            voiceCommand.textContent = '"' + randomCommand + '"';
+            voiceCommand.style.display = 'block';
+            voiceStatus.textContent = '명령을 인식했습니다';
+            
+            setTimeout(() => {
+              handleVoiceCommand(randomCommand);
+              voiceBtn.classList.remove('active');
+              isListening = false;
+              
+              setTimeout(() => {
+                voicePopup.classList.remove('active');
+                voiceCommand.style.display = 'none';
+                voiceStatus.textContent = '마이크 버튼을 눌러 음성 명령을 시작하세요';
+              }, 2000);
+            }, 1500);
+          }, 3000);
+        }else{
+          voiceBtn.classList.remove('active');
+          voicePopup.classList.remove('active');
+          voiceStatus.textContent = '마이크 버튼을 눌러 음성 명령을 시작하세요';
+        }
+      });
+      
+      function handleVoiceCommand(command){
+        switch(command){
+          case '예약하기':
+            document.getElementById('booking').scrollIntoView({behavior: 'smooth'});
+            break;
+          case '돌봄인력 보기':
+            document.getElementById('caregivers').scrollIntoView({behavior: 'smooth'});
+            break;
+          case '긴급 연락':
+            if(confirm('긴급 상황입니까? 1577-1004로 연결하시겠습니까?')){
+              window.location.href = 'tel:1577-1004';
+            }
+            break;
+          case '문의하기':
+            document.getElementById('contact').scrollIntoView({behavior: 'smooth'});
+            break;
+        }
+      }
+      
+      // 팝업 외부 클릭 시 닫기
+      document.addEventListener('click', function(e){
+        if(!voiceBtn.contains(e.target) && !voicePopup.contains(e.target)){
+          voicePopup.classList.remove('active');
+        }
+      });
+      
+    })();
+  </script>
+</body>
+</html>
